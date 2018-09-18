@@ -7,6 +7,7 @@
 </head>
 <body>
 <form action="/students" method="post">
+    <input type="hidden" name="id" value="${student.id}">
     <table>
         <tr>
             <td>Фамилия :</td>
@@ -15,22 +16,20 @@
         </tr>
         <tr>
             <td>Имя :</td>
-            <td><input type="text" name="firstname">
+            <td><input type="text" name="firstname" value="${student.firstname}">
             </td>
         </tr>
         <tr>
             <td>Сумма :</td>
-            <td><input type="number" name="amount"></td>
+            <td><input type="number" name="amount" value="${student.amount}"></td>
         </tr>
         <tr>
             <td>Дата :</td>
-            <td><input type="date" name="date"></td>
+            <td><input type="date" name="date" value="${student.date}"></td>
         </tr>
         <tr>
             <td>Как передали:</td>
-            <td>
-                <input type="text" name="transferMethod">
-            </td>
+            <td><input type="text" name="transferMethod" value="${student.transferMethod}"></td>
         </tr>
         <tr>
             <td><input type="submit" value="Добавить"></td>

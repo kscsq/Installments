@@ -34,4 +34,8 @@ public class StudentService {
     public void delete(Integer id) {
         repository.deleteById(id);
     }
+
+    public void update(Student student) {
+        repository.save(student);
+    }
 }

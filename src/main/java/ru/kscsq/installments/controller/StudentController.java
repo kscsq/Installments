@@ -40,20 +40,30 @@ public class StudentController {
     }
 
     @PostMapping
-    public String addStudent(@RequestParam String lastname,
+    public String addStudent(@RequestParam Integer id,
+                             @RequestParam String lastname,
                              @RequestParam String firstname,
                              @RequestParam Double amount,
                              @RequestParam String date,
                              @RequestParam String transferMethod) {
 
-        Student student = new Student();
-        student.setLastname(lastname);
-        student.setFirstname(firstname);
-        student.setAmount(amount);
-        student.setDate(LocalDate.parse(date));
-        student.setTransferMethod(transferMethod);
-
-        service.save(student);
+        if (id == null) {
+            Student student = new Student();
+            student.setLastname(lastname);
+            student.setFirstname(firstname);
+            student.setAmount(amount);
+            student.setDate(LocalDate.parse(date));
+            student.setTransferMethod(transferMethod);
+            service.save(student);
+        } else {
+            Student student = service.getOne(id);
+            student.setLastname(lastname);
+            student.setFirstname(firstname);
+            student.setAmount(amount);
+            student.setDate(LocalDate.parse(date));
+            student.setTransferMethod(transferMethod);
+            service.update(student);
+        }
         return "redirect:/students";
     }
 
