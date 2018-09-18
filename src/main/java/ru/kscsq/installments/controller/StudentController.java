@@ -8,6 +8,7 @@ import ru.kscsq.installments.model.Student;
 import ru.kscsq.installments.service.StudentService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/students")
@@ -18,7 +19,10 @@ public class StudentController {
 
     @GetMapping
     public String getAll(Model model) {
+        List<Student> list = service.getAll();
+        Double total = list.stream().mapToDouble(d -> d.getAmount()).sum();
         model.addAttribute("students", service.getAll());
+        model.addAttribute("total", total);
 
         return "table";
     }

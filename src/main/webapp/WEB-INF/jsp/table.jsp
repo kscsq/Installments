@@ -16,6 +16,7 @@
     <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
+            <th>N</th>
             <th>Last Name</th>
             <th>First Name</th>
             <th>Amount</th>
@@ -24,8 +25,11 @@
         </tr>
         </thead>
         <tbody>
+        <c:set var="index" value="0" scope="page"/>
         <c:forEach items="${students}" var="student">
+            <c:set var="index" value="${index + 1}" scope="page"/>
             <tr>
+                <td>${index}</td>
                 <td>${student.lastname}</td>
                 <td>${student.firstname}</td>
                 <td>${student.amount}</td>
@@ -35,6 +39,12 @@
                 <td><a href="/students/update/${student.id}">Update</a></td>
             </tr>
         </c:forEach>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Итого :</td>
+            <td>${total}</td>
+        </tr>
         </tbody>
     </table>
     <a href="/students/create">Create</a>
