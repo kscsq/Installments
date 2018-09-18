@@ -10,7 +10,7 @@
     <table>
         <tr>
             <td>Фамилия :</td>
-            <td><input type="text" name="lastname">
+            <td><input type="text" name="lastname" value="${student.lastname}">
             </td>
         </tr>
         <tr>
@@ -27,15 +27,16 @@
             <td><input type="date" name="date"></td>
         </tr>
         <tr>
-        <td><input type="radio" name="transferMethod" id="radiobutton1" value="cash">
-            <label for="radiobutton1">Cash</label>
-            <input type="radio" name="transferMethod" id="radiobutton2" value="card">
-            <label for="radiobutton2">Card</label>
-        </td>
+            <td>Как передали:</td>
+            <td>
+                <input type="text" name="transferMethod">
+            </td>
         </tr>
         <tr>
             <td><input type="submit" value="Добавить"></td>
-            <td><button onclick="window.history.back()" type="button">Отменить</button></td>
+            <td>
+                <button onclick="window.history.back()" type="button">Отменить</button>
+            </td>
 
         </tr>
     </table>

@@ -32,11 +32,12 @@
                 <td>${student.date}</td>
                 <td>${student.transferMethod}</td>
                 <td><a href="/students/delete/${student.id}">Delete</a></td>
+                <td><a href="/students/update/${student.id}">Update</a></td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-    <a href="students/create">Create</a>
+    <a href="/students/create">Create</a>
 
 
 

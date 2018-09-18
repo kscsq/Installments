@@ -30,6 +30,15 @@ public class StudentController {
         return "studentForm";
     }
 
+    @GetMapping("/update/{id}")
+    public String updateStudent(@PathVariable("id") String id, Model model) {
+        Student student = service.getOne(Integer.parseInt(id));
+
+        model.addAttribute("student", student);
+
+        return "studentForm";
+    }
+
     @PostMapping
     public String addStudent(@RequestParam String lastname,
                              @RequestParam String firstname,
@@ -49,7 +58,7 @@ public class StudentController {
     }
 
     @GetMapping("delete/{id}")
-    public String deleteStudent(@PathVariable("id") Integer id){
+    public String deleteStudent(@PathVariable("id") Integer id) {
         service.delete(id);
 
         return "redirect:/students";
