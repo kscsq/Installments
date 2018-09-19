@@ -30,13 +30,13 @@ public class StudentController {
     @GetMapping("/create")
     public String createStudent(Model model) {
 
-        model.addAttribute("student", new Student());
+//        model.addAttribute("student", new Student());
         return "studentForm";
     }
 
     @GetMapping("/update/{id}")
-    public String updateStudent(@PathVariable("id") String id, Model model) {
-        Student student = service.getOne(Integer.parseInt(id));
+    public String updateStudent(@PathVariable("id") Integer id, Model model) {
+        Student student = service.getOne(id);
 
         model.addAttribute("student", student);
 

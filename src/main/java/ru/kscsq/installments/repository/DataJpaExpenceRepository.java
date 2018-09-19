@@ -16,4 +16,19 @@ public class DataJpaExpenceRepository implements ExpenceRepository {
     public List<Expence> getAll() {
         return expenceRepository.findAll();
     }
+
+    @Override
+    public void save(Expence expence) {
+        expenceRepository.save(expence);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        expenceRepository.deleteById(id);
+    }
+
+    @Override
+    public Expence getOne(Integer id) {
+        return expenceRepository.getOne(id);
+    }
 }

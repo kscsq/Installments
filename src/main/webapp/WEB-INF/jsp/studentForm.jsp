@@ -2,46 +2,36 @@
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
-<%--<head>--%>
-<%--<title>Добавить / изменить ученика</title>--%>
-<jsp:include page="fragments/headTag.jsp"/>
-</head>
-<body>
-<div class="container">
-    <form action="/students" method="post">
-        <input type="hidden" name="id" value="${student.id}">
-        <table>
-            <tr>
-                <td>Фамилия :</td>
-                <td><input type="text" name="lastname" value="${student.lastname}">
-                </td>
-            </tr>
-            <tr>
-                <td>Имя :</td>
-                <td><input type="text" name="firstname" value="${student.firstname}">
-                </td>
-            </tr>
-            <tr>
-                <td>Сумма :</td>
-                <td><input type="number" name="amount" value="${student.amount}"></td>
-            </tr>
-            <tr>
-                <td>Дата :</td>
-                <td><input type="date" name="date" value="${student.date}"></td>
-            </tr>
-            <tr>
-                <td>Как передали:</td>
-                <td><input type="text" name="transferMethod" value="${student.transferMethod}"></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Добавить"></td>
-                <td>
-                    <button onclick="window.history.back()" type="button">Отменить</button>
-                </td>
 
-            </tr>
-        </table>
-    </form>
+<jsp:include page="fragments/headTag.jsp"/>
+<form action="/students" method="post">
+    <input type="hidden" name="id" value="${student.id}">
+    <div class="form-group">
+        <label for="lastname">Фамилия :</label>
+        <input class="form-control" id="lastname" type="text" name="lastname" value="${student.lastname}">
+    </div>
+    <div class="form-group">
+        <label for="firstname">Имя :</label>
+        <input class="form-control" id="firstname" type="text" name="firstname" value="${student.firstname}">
+    </div>
+    <div class="form-group">
+        <label for="amount">Сумма :</label>
+        <input class="form-control" id="amount" type="number" name="amount" value="${student.amount}">
+    </div>
+    <div class="form-group">
+        <label for="date">Дата :</label>
+        <input class="form-control" id="date" type="date" name="date" value="${student.date}">
+    </div>
+    <div class="form-group">
+        <label for="transferMethod">Как передали:</label>
+        <input class="form-control" id="transferMethod" type="text" name="transferMethod"
+               value="${student.transferMethod}">
+    </div>
+    <div class="form-group">
+        <input class="btn btn-success" type="submit" value="Добавить">
+        <button class="btn btn-danger" onclick="window.history.back()" type="button">Отменить</button>
+    </div>
+</form>
 </div>
 </body>
 </html>
