@@ -3,12 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html >
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Взносы на нужды класса</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
+<jsp:include page="fragments/headTag.jsp"/>
+<%--<head>--%>
+    <%--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">--%>
+    <%--<title>Взносы на нужды класса</title>--%>
+    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"--%>
+          <%--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"--%>
+          <%--crossorigin="anonymous">--%>
+<%--</head>--%>
 </head>
 <body>
 <div class="container">
@@ -47,8 +49,9 @@
         </tr>
         </tbody>
     </table>
-    <a href="/students/create">Create</a>
-
+    <a href="/students/create">Добавить</a>
+    <br>
+    <a href="/expences">Расходы</a>
 
 
 </div>
