@@ -31,6 +31,9 @@
         <input class="btn btn-success" type="submit" value="Добавить">
         <button class="btn btn-danger" onclick="window.history.back()" type="button">Отменить</button>
     </div>
+    <input type="hidden"
+           name="${_csrf.parameterName}"
+           value="${_csrf.token}"/>
 </form>
 </div>
 </body>

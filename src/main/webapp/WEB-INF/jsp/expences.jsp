@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
+<h4>Добро пожаловать, <sec:authentication property="principal.username"/></h4>
 
 <h1>Список расходов</h1>
 
@@ -44,6 +45,11 @@
 <a class="btn btn-success" href="/expences/create">Добавить расход</a>
 
 <a class="btn btn-info" href="/students">К списку класса</a>
+<form style="display: inline" action="/logout" method="post">
+    <input class="btn btn-warning" type="submit" value="Logout">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+</form>
+
 </div>
 </body>
 </html>

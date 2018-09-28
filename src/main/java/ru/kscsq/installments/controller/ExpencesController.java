@@ -1,6 +1,7 @@
 package ru.kscsq.installments.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ExpencesController {
     @GetMapping
     public String getAll(Model model){
         List<Expence> list = service.getAll();
-        Double total = list.stream().mapToDouble(d -> d.getAmount()).sum();
+        Double total = list.stream().mapToDouble(Expence::getAmount).sum();
 
         model.addAttribute("expences", service.getAll());
         model.addAttribute("total", total);
@@ -29,12 +30,14 @@ public class ExpencesController {
     }
 
     @GetMapping("/create")
+    @Secured("ROLE_ADMIN")
     public String createExpence(Model model){
 
         return "expenceForm";
     }
 
     @GetMapping("/update/{id}")
+    @Secured("ROLE_ADMIN")
     public String updateExpence(@PathVariable("id") Integer id, Model model){
         Expence expence = service.getOne(id);
 
@@ -44,6 +47,7 @@ public class ExpencesController {
     }
 
     @PostMapping
+    @Secured("ROLE_ADMIN")
     public String addExpence(@RequestParam Integer id,
                              @RequestParam String name,
                              @RequestParam Double amount,
@@ -72,6 +76,7 @@ public class ExpencesController {
     }
 
     @GetMapping("/delete/{id}")
+    @Secured("ROLE_ADMIN")
     public String deleteExpence(@PathVariable("id") Integer id) {
         service.delete(id);
 

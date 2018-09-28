@@ -28,13 +28,13 @@ public class StudentController {
     }
 
     @GetMapping("/create")
+//    @Secured("ADMIN")
     public String createStudent(Model model) {
-
-//        model.addAttribute("student", new Student());
         return "studentForm";
     }
 
     @GetMapping("/update/{id}")
+//    @Secured("ADMIN")
     public String updateStudent(@PathVariable("id") Integer id, Model model) {
         Student student = service.getOne(id);
 
@@ -44,6 +44,7 @@ public class StudentController {
     }
 
     @PostMapping
+//    @Secured("ADMIN")
     public String addStudent(@RequestParam Integer id,
                              @RequestParam String lastname,
                              @RequestParam String firstname,
@@ -72,6 +73,7 @@ public class StudentController {
     }
 
     @GetMapping("delete/{id}")
+//    @Secured("ADMIN")
     public String deleteStudent(@PathVariable("id") Integer id) {
         service.delete(id);
 
