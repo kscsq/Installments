@@ -12,15 +12,18 @@ import java.util.stream.Collectors;
 @Service
 public class ExpenceService {
 
+    private final ExpenceRepository repository;
+
     @Autowired
-    private ExpenceRepository repository;
+    public ExpenceService(ExpenceRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Expence> getAll(){
-        List<Expence> list = repository.getAll()
+        return repository.getAll()
                 .stream()
                 .sorted(Comparator.comparing(Expence::getDate))
                 .collect(Collectors.toList());
-        return list;
     }
 
     public void save(Expence expence) {

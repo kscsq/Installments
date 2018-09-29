@@ -15,11 +15,15 @@ import java.util.List;
 @RequestMapping("/expences")
 public class ExpencesController {
 
+    private final ExpenceService service;
+
     @Autowired
-    private ExpenceService service;
+    public ExpencesController(ExpenceService service) {
+        this.service = service;
+    }
 
     @GetMapping
-    public String getAll(Model model){
+    public String getAll(Model model) {
         List<Expence> list = service.getAll();
         Double total = list.stream().mapToDouble(Expence::getAmount).sum();
 
@@ -31,14 +35,14 @@ public class ExpencesController {
 
     @GetMapping("/create")
     @Secured("ROLE_ADMIN")
-    public String createExpence(Model model){
+    public String createExpence(Model model) {
 
         return "expenceForm";
     }
 
     @GetMapping("/update/{id}")
     @Secured("ROLE_ADMIN")
-    public String updateExpence(@PathVariable("id") Integer id, Model model){
+    public String updateExpence(@PathVariable("id") Integer id, Model model) {
         Expence expence = service.getOne(id);
 
         model.addAttribute("expence", expence);

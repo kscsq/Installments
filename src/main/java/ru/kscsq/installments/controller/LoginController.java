@@ -16,7 +16,6 @@ public class LoginController {
 
     @GetMapping
     public String indexPage(ModelMap map, Principal principal){
-        System.out.println(principal.getName());
         return "redirect:/students";
     }
 

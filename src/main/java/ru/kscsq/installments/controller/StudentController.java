@@ -1,6 +1,7 @@
 package ru.kscsq.installments.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +15,17 @@ import java.util.List;
 @RequestMapping("/students")
 public class StudentController {
 
+    private final StudentService service;
+
     @Autowired
-    private StudentService service;
+    public StudentController(StudentService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public String getAll(Model model) {
         List<Student> list = service.getAll();
-        Double total = list.stream().mapToDouble(d -> d.getAmount()).sum();
+        Double total = list.stream().mapToDouble(Student::getAmount).sum();
         model.addAttribute("students", service.getAll());
         model.addAttribute("total", total);
 
@@ -28,13 +33,13 @@ public class StudentController {
     }
 
     @GetMapping("/create")
-//    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     public String createStudent(Model model) {
         return "studentForm";
     }
 
     @GetMapping("/update/{id}")
-//    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     public String updateStudent(@PathVariable("id") Integer id, Model model) {
         Student student = service.getOne(id);
 
@@ -44,7 +49,7 @@ public class StudentController {
     }
 
     @PostMapping
-//    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     public String addStudent(@RequestParam Integer id,
                              @RequestParam String lastname,
                              @RequestParam String firstname,
@@ -73,7 +78,7 @@ public class StudentController {
     }
 
     @GetMapping("delete/{id}")
-//    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     public String deleteStudent(@PathVariable("id") Integer id) {
         service.delete(id);
 
