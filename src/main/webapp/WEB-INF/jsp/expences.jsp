@@ -1,6 +1,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
@@ -16,7 +17,7 @@
             <th>Расход</th>
             <th>Сумма</th>
             <th>Дата</th>
-            <th>Тип</th>
+            <th class="d-none d-xl-table-cell">Тип</th>
             <th>Ответственный</th>
         </tr>
         </thead>
@@ -27,9 +28,9 @@
             <tr>
                 <td>${index}</td>
                 <td>${expence.name}</td>
-                <td>${expence.amount}</td>
+                <td class="text-right"><fmt:formatNumber value="${expence.amount}" type="number" maxFractionDigits="0"/></td>
                 <td>${expence.date}</td>
-                <td>${expence.type}</td>
+                <td class="d-none d-xl-table-cell">${expence.type}</td>
                 <td>${expence.responsiblePerson}</td>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <td><a href="/expences/delete/${expence.id}">Удалить</a></td>
@@ -40,7 +41,7 @@
         <tr>
             <td></td>
             <td>Итого :</td>
-            <td>${total}</td>
+            <td class="text-right"><fmt:formatNumber value="${total}" maxFractionDigits="0"/></td>
         </tr>
         </tbody>
 
