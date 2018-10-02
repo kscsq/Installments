@@ -33,9 +33,13 @@
             <!--<groupId>org.springframework</groupId>-->
             <!--<artifactId>spring-jdbc</artifactId>-->
         <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>mysql</groupId>-->
+            <!--<artifactId>mysql-connector-java</artifactId>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
         <!--<dependency>-->
