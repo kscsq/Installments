@@ -38,20 +38,18 @@
                 </tr>
             </c:forEach>
             <tr>
-                <td></td>
-                <td></td>
-                <td>Итого :</td>
+                <td colspan="3" class="text-right">Итого :</td>
                 <td class="text-right"><fmt:formatNumber value="${total}" maxFractionDigits="0"/></td>
             </tr>
             </tbody>
         </table>
     </div>
     <sec:authorize access="hasRole('ROLE_ADMIN')">
-        <a class="btn btn-success" href="/students/create">Добавить</a>
+        <a class="btn btn-success" href="${pageContext.request.contextPath}/students/create">Добавить</a>
     </sec:authorize>
-    <a class="btn btn-info" href="/expences">К списку расходов</a>
+    <a class="btn btn-info" href="${pageContext.request.contextPath}/expences">К списку расходов</a>
 
-    <form style="display: inline" action="/logout" method="post">
+    <form style="display: inline" action="${pageContext.request.contextPath}/logout" method="post">
         <input class="btn btn-warning" type="submit" value="Logout">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     </form>

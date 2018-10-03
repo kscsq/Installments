@@ -15,18 +15,18 @@ import java.util.List;
 @RequestMapping("/students")
 public class StudentController {
 
-    private final StudentService service;
+    private final StudentService studentService;
 
     @Autowired
-    public StudentController(StudentService service) {
-        this.service = service;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
     @GetMapping
     public String getAll(Model model) {
-        List<Student> list = service.getAll();
+        List<Student> list = studentService.getAll();
         Double total = list.stream().mapToDouble(Student::getAmount).sum();
-        model.addAttribute("students", service.getAll());
+        model.addAttribute("students", studentService.getAll());
         model.addAttribute("total", total);
 
         return "table";
@@ -41,7 +41,7 @@ public class StudentController {
     @GetMapping("/update/{id}")
     @Secured("ROLE_ADMIN")
     public String updateStudent(@PathVariable("id") Integer id, Model model) {
-        Student student = service.getOne(id);
+        Student student = studentService.getOne(id);
 
         model.addAttribute("student", student);
 
@@ -64,15 +64,15 @@ public class StudentController {
             student.setAmount(amount);
             student.setDate(LocalDate.parse(date));
             student.setTransferMethod(transferMethod);
-            service.save(student);
+            studentService.save(student);
         } else {
-            Student student = service.getOne(id);
+            Student student = studentService.getOne(id);
             student.setLastname(lastname);
             student.setFirstname(firstname);
             student.setAmount(amount);
             student.setDate(LocalDate.parse(date));
             student.setTransferMethod(transferMethod);
-            service.update(student);
+            studentService.update(student);
         }
         return "redirect:/students";
     }
@@ -80,7 +80,7 @@ public class StudentController {
     @GetMapping("delete/{id}")
     @Secured("ROLE_ADMIN")
     public String deleteStudent(@PathVariable("id") Integer id) {
-        service.delete(id);
+        studentService.delete(id);
 
         return "redirect:/students";
     }

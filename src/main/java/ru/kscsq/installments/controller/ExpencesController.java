@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kscsq.installments.model.Expence;
+import ru.kscsq.installments.model.Student;
 import ru.kscsq.installments.service.ExpenceService;
+import ru.kscsq.installments.service.StudentService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,20 +17,28 @@ import java.util.List;
 @RequestMapping("/expences")
 public class ExpencesController {
 
-    private final ExpenceService service;
+    private final ExpenceService expenceService;
 
     @Autowired
-    public ExpencesController(ExpenceService service) {
-        this.service = service;
+    private StudentService studentService;
+
+    @Autowired
+    public ExpencesController(ExpenceService expenceService) {
+        this.expenceService = expenceService;
     }
+
 
     @GetMapping
     public String getAll(Model model) {
-        List<Expence> list = service.getAll();
+        List<Expence> list = expenceService.getAll();
         Double total = list.stream().mapToDouble(Expence::getAmount).sum();
 
-        model.addAttribute("expences", service.getAll());
+        List<Student> studentsList = studentService.getAll();
+        Double studentsTotal = studentsList.stream().mapToDouble(Student::getAmount).sum();
+
+        model.addAttribute("expences", expenceService.getAll());
         model.addAttribute("total", total);
+        model.addAttribute("studentsTotal", studentsTotal);
 
         return "expences";
     }
@@ -43,7 +53,7 @@ public class ExpencesController {
     @GetMapping("/update/{id}")
     @Secured("ROLE_ADMIN")
     public String updateExpence(@PathVariable("id") Integer id, Model model) {
-        Expence expence = service.getOne(id);
+        Expence expence = expenceService.getOne(id);
 
         model.addAttribute("expence", expence);
 
@@ -66,15 +76,15 @@ public class ExpencesController {
             expence.setDate(LocalDate.parse(date));
             expence.setType(type);
             expence.setResponsiblePerson(responsiblePerson);
-            service.save(expence);
+            expenceService.save(expence);
         } else {
-            Expence expence = service.getOne(id);
+            Expence expence = expenceService.getOne(id);
             expence.setName(name);
             expence.setAmount(amount);
             expence.setDate(LocalDate.parse(date));
             expence.setType(type);
             expence.setResponsiblePerson(responsiblePerson);
-            service.save(expence);
+            expenceService.save(expence);
         }
         return "redirect:/expences";
     }
@@ -82,7 +92,7 @@ public class ExpencesController {
     @GetMapping("/delete/{id}")
     @Secured("ROLE_ADMIN")
     public String deleteExpence(@PathVariable("id") Integer id) {
-        service.delete(id);
+        expenceService.delete(id);
 
         return "redirect:/expences";
     }

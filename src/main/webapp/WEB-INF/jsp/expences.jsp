@@ -28,7 +28,8 @@
             <tr>
                 <td>${index}</td>
                 <td>${expence.name}</td>
-                <td class="text-right"><fmt:formatNumber value="${expence.amount}" type="number" maxFractionDigits="0"/></td>
+                <td class="text-right"><fmt:formatNumber value="${expence.amount}" type="number"
+                                                         maxFractionDigits="0"/></td>
                 <td>${expence.date}</td>
                 <td class="d-none d-xl-table-cell">${expence.type}</td>
                 <td>${expence.responsiblePerson}</td>
@@ -39,18 +40,26 @@
             </tr>
         </c:forEach>
         <tr>
-            <td></td>
-            <td>Итого :</td>
+            <td colspan="2" class="text-right">Итого :</td>
             <td class="text-right"><fmt:formatNumber value="${total}" maxFractionDigits="0"/></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-right">Всего сдано :</td>
+            <td class="text-right"><fmt:formatNumber value="${studentsTotal}" maxFractionDigits="0"/></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-right"><b>Остаток :</b></td>
+            <td class="text-right"><b><fmt:formatNumber value="${studentsTotal-total}" maxFractionDigits="0"/></b>
+            </td>
         </tr>
         </tbody>
 
     </table>
     <sec:authorize access="hasRole('ROLE_ADMIN')">
-        <a class="btn btn-success" href="/expences/create">Добавить расход</a>
+        <a class="btn btn-success" href="${pageContext.request.contextPath}/expences/create">Добавить расход</a>
     </sec:authorize>
-    <a class="btn btn-info" href="/students">К списку класса</a>
-    <form style="display: inline" action="/logout" method="post">
+    <a class="btn btn-info" href="${pageContext.request.contextPath}/students">К списку класса</a>
+    <form style="display: inline" action="${pageContext.request.contextPath}/logout" method="post">
         <input class="btn btn-warning" type="submit" value="Logout">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     </form>
